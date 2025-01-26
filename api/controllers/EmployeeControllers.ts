@@ -15,7 +15,7 @@ export class EmployeeController {
 
   static async getEmployeeByRole(req: Request, res: Response) {
     try {
-      const role = req.params.role;
+      const { role } = req.params;
       const employers = await EmployeeModel.getEmployeeByRole(role);
       res.status(200).json(employers);
     } catch (e) {
