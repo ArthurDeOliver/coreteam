@@ -1,14 +1,33 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
 
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+model Employee {
+  cpf      String         @id
+  name     String
+  salary   Float
+  role     String
+  teams    EmployeeTeam[] // Relação com EmployeeTeam
+}
+
+model Team {
+  id          Int          @id @default(autoincrement())
+  name        String
+  description String?
+  employees   EmployeeTeam[] // Relação com EmployeeTeam
+}
+
+model EmployeeTeam {
+  employeeCpf String
+  teamId      Int
+
+  employee    Employee @relation(fields: [employeeCpf], references: [cpf])
+  team        Team     @relation(fields: [teamId], references: [id])
+
+  @@id([employeeCpf, teamId]) // Índice composto para relação N:N
 }
