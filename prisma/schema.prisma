@@ -1,33 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+model employee {
+  cpf          String         @id
+  name         String
+  salary       Float
+  role         String
+  employeeteam employeeteam[]
 }
 
-model Employee {
-  cpf      String         @id
-  name     String
-  salary   Float
-  role     String
-  teams    EmployeeTeam[] // Relação com EmployeeTeam
-}
-
-model Team {
-  id          Int          @id @default(autoincrement())
-  name        String
-  description String?
-  employees   EmployeeTeam[] // Relação com EmployeeTeam
-}
-
-model EmployeeTeam {
+model employeeteam {
   employeeCpf String
   teamId      Int
+  employee    employee @relation(fields: [employeeCpf], references: [cpf], map: "EmployeeTeam_employeeCpf_fkey")
+  team        team     @relation(fields: [teamId], references: [id], map: "EmployeeTeam_teamId_fkey")
 
-  employee    Employee @relation(fields: [employeeCpf], references: [cpf])
-  team        Team     @relation(fields: [teamId], references: [id])
+  @@id([employeeCpf, teamId])
+  @@index([teamId], map: "EmployeeTeam_teamId_fkey")
+}
 
-  @@id([employeeCpf, teamId]) // Índice composto para relação N:N
+model team {
+  id           Int            @id @default(autoincrement())
+  name         String
+  description  String?
+  employeeteam employeeteam[]
 }

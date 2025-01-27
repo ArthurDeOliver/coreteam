@@ -22,4 +22,29 @@ export class EmployeeController {
       res.status(500).json({ message: "Erro ao buscar funcionários" });
     }
   }
+
+  static async createEmployee(req: Request, res: Response) {
+    try {
+      const { name, role, salary, cpf } = req.body;
+      const employerCreated = await EmployeeModel.createEmployee(
+        cpf,
+        name,
+        Number(salary),
+        role
+      );
+      res.status(200).json(employerCreated);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
+
+  static async deleteEmployee(req: Request, res: Response) {
+    try {
+      const { cpf } = req.params;
+      const deletedEmployee = await EmployeeModel.deleteEmployee(cpf);
+      res.status(200).json(deletedEmployee);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  }
 }

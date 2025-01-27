@@ -11,4 +11,17 @@ export class EmployeeModel {
   static async getEmployeeByRole(role: string) {
     return prisma.employee.findMany({ where: { role } });
   }
+
+  static async createEmployee(
+    cpf: string,
+    name: string,
+    salary: number,
+    role: string
+  ) {
+    return prisma.employee.create({ data: { cpf, name, salary, role } });
+  }
+
+  static async deleteEmployee(cpf: string) {
+    return prisma.employee.delete({ where: { cpf } });
+  }
 }
