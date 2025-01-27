@@ -5,6 +5,7 @@ interface InputProps {
   type: string;
   label: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value?: string;
   enabled: boolean;
 }
 
@@ -13,6 +14,7 @@ export const InputComponent = ({
   placeholder,
   type,
   onChange,
+  value,
   enabled,
 }: InputProps) => {
   return (
@@ -27,6 +29,7 @@ export const InputComponent = ({
         type={type}
         placeholder={placeholder}
         onChange={onChange}
+        value={value}
         disabled={!enabled}
       />
     </div>
