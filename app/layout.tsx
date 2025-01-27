@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Roboto } from "next/font/google";
+import { Montserrat } from "next/font/google";
 
 const roboto = Roboto({
+  subsets: ["latin"], // Inclua o suporte para o alfabeto latino
+  weight: ["400", "500", "700"], // Escolha os pesos desejados
+});
+
+const montserrat = Montserrat({
   subsets: ["latin"], // Inclua o suporte para o alfabeto latino
   weight: ["400", "500", "700"], // Escolha os pesos desejados
 });

@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"], // Use a variável CSS da fonte Montserrat
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
