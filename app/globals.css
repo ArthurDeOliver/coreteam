@@ -13,6 +13,23 @@
     --foreground: #ededed;
   }
 }
+/* Estilização da barra de rolagem */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px; /* Largura da barra */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Fundo da trilha */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #c4c4c4; /* Cor da barra de rolagem */
+  border-radius: 8px; /* Bordas arredondadas */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0; /* Cor da barra ao passar o mouse */
+}
 
 body {
   color: var(--foreground);
