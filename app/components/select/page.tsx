@@ -10,7 +10,7 @@ interface RoleSelectProps {
 
 export const RoleSelect = ({ value, onChange, name }: RoleSelectProps) => {
   return (
-    <div className="flex flex-col gap-2 h-full">
+    <div className="flex w-full flex-col gap-2 h-full">
       <p className="text-sm">Função</p>
       <select
         name={name}

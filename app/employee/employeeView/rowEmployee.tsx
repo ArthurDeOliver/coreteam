@@ -55,7 +55,7 @@ export const RowEmployee = ({
         R$ {employee.salary}
       </td>
       <td className="py-3 px-6 border-b border-gray-900 ">
-        <div className="flex w-full items-center justify-between">
+        <div className="flex w-full items-center justify-center">
           <button onClick={() => handleDeleteEmployee(employee.cpf)}>
             <FaTrashAlt
               color="black"

@@ -14,7 +14,7 @@ export const ButtonAdd = ({ text, onClick, enabled, type }: ButtonAddProps) => {
       type={type}
       onClick={onClick}
       disabled={!enabled}
-      className="w-full px-4 py-2 
+      className="w-full h-full px-4 py-2 
       bg-primary-color-500 
       hover:bg-primary-color-600 
       active:bg-primary-color-400 

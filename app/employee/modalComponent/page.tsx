@@ -67,8 +67,8 @@ export const ModalComponent = ({
 
   return (
     //fixed permite o componente ficar fixo a tela primeira div cria o fundo, segunda div a tela em si
-    <div className="fixed inset-0 flex bg-black bg-opacity-50 items-center justify-center z-10">
-      <div className="bg-bg-page-950 relative rounded-md shadow-lg p-6 flex flex-col gap-4 max-w-2xl max-h-[80vh] w-full  custom-scrollbar">
+    <div className="fixed inset-0 flex bg-black bg-opacity-50 items-center justify-center z-10 px-4 sm:px-0">
+      <div className="bg-bg-page-950 relative rounded-md shadow-lg p-6 flex flex-col  max-w-2xl text-sm sm:text-base w-full  custom-scrollbar">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl text-white">Cadastrar Funcionário</h2>
           <button
@@ -81,8 +81,8 @@ export const ModalComponent = ({
             />
           </button>
         </div>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          <div className="w-full flex gap-7">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <div className="w-full flex gap-4  flex-col sm:flex-row">
             <InputComponent
               value={formData.name}
               onChange={handleChange}
@@ -102,7 +102,7 @@ export const ModalComponent = ({
               name="cpf" // Adiciona o nome para identificar a propriedade
             />
           </div>
-          <div className="w-full flex gap-7 items-end">
+          <div className="w-full flex gap-4  items-end flex-col sm:flex-row">
             <InputComponent
               value={formData.salary}
               onChange={handleChange}

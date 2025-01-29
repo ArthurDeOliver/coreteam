@@ -50,7 +50,7 @@ export const EmployeeView = ({
               <th className="py-3 px-6 text-left">Nome</th>
               <th className="py-3 px-6 text-left">Função</th>
               <th className="py-3 px-6 text-left">Salário</th>
-              <th className="py-3 px-6 text-left">Ações</th>
+              <th className="py-3 px-6 text-center">Excluir</th>
             </tr>
           </thead>
 
