@@ -9,6 +9,15 @@ import { ModalComponent } from "./modalAddEmployee/page";
 import { EmployeeView } from "./employeeView/page";
 
 const EmployeePage = () => {
+  const [employeeList, setEmployeeList] = useState<
+    Array<{
+      cpf: string;
+      name: string;
+      role: string;
+      salary: string;
+    }>
+  >([]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <main className="flex flex-col ">
@@ -26,7 +35,7 @@ const EmployeePage = () => {
           <div className="flex justify-center items-center w-full flex-col gap-5 px-5">
             <div className="flex w-full items-center justify-between">
               <span className="text-font-primary-500">
-                Clique no funcionário para editar ou excluir
+                Lista de funcioários cadastrados no sistema CoreTeam
               </span>
               <div className="max-w-60">
                 <ButtonAdd
@@ -36,9 +45,17 @@ const EmployeePage = () => {
                 />
               </div>
             </div>
-            {isModalOpen && <ModalComponent setIsModalOpen={setIsModalOpen} />}
+            {isModalOpen && (
+              <ModalComponent
+                setEmployeeList={setEmployeeList}
+                setIsModalOpen={setIsModalOpen}
+              />
+            )}
             <div className="w-full">
-              <EmployeeView />
+              <EmployeeView
+                employeeList={employeeList}
+                setEmployeeList={setEmployeeList}
+              />
             </div>
           </div>
         </div>

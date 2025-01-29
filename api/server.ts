@@ -1,10 +1,13 @@
 import express from "express";
 import EmployerRouter from "./routes/EmployeeRouter";
+import cors from "cors";
+
 import TeamRouter from "./routes/TeamRouter";
 import EmployeeTeamRouter from "./routes/EmployeeTeamRouter";
 
 const app = express(); //criando uma instância do express
 const PORT = 3001; //porta do servidor
+app.use(cors());
 app.use(express.json()); //middleware para o express entender json
 
 //rotas

@@ -16,7 +16,7 @@ const HomePage = () => {
         <AsideNav />
         <div className="w-full bg-bg-page-950 p-4 rounded-md flex flex-col gap-6">
           <h1 className=" text-2xl text-primary-color-500 flex items-center gap-2 pb-2 border-b-2 border-gray-900">
-            <FaHome />
+            <FaHome size={35} />
             Home
           </h1>
           <div className="flex justify-center items-center w-full flex-col gap-5 py-4">

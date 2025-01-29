@@ -1,6 +1,7 @@
 "use client";
 
 interface InputProps {
+  name: string;
   placeholder: string;
   type: string;
   label: string;
@@ -11,6 +12,7 @@ interface InputProps {
 
 export const InputComponent = ({
   label,
+  name,
   placeholder,
   type,
   onChange,
@@ -18,13 +20,14 @@ export const InputComponent = ({
   enabled,
 }: InputProps) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex w-full flex-col gap-2">
       <label htmlFor="input" className="text-sm pt-2">
         {label}
       </label>
       <input
+        required
         id="input"
-        name="input"
+        name={name}
         className="px-3 py-2 rounded-md outline-none text-black focus:outline-orange-500 "
         type={type}
         placeholder={placeholder}
