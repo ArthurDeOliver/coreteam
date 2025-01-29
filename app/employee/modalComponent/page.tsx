@@ -47,13 +47,14 @@ export const ModalComponent = ({
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3001/employee", {
+      const response = await fetch("http://localhost:3001/employee/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
+      console.log(formData);
       if (response.ok) {
         const newEmployee = await response.json();
         setEmployeeList((prevList) => [...prevList, newEmployee]);
@@ -67,9 +68,9 @@ export const ModalComponent = ({
   return (
     //fixed permite o componente ficar fixo a tela primeira div cria o fundo, segunda div a tela em si
     <div className="fixed inset-0 flex bg-black bg-opacity-50 items-center justify-center z-10">
-      <div className="bg-bg-page-950 relative rounded-md shadow-lg p-4 flex flex-col gap-4 max-w-2xl max-h-[80vh] w-full  custom-scrollbar">
+      <div className="bg-bg-page-950 relative rounded-md shadow-lg p-6 flex flex-col gap-4 max-w-2xl max-h-[80vh] w-full  custom-scrollbar">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl  text-white">Adicionar Funcionário</h2>
+          <h2 className="text-xl text-white">Cadastrar Funcionário</h2>
           <button
             className="absolute -top-4 -right-4 bg-white rounded-full"
             onClick={() => setIsModalOpen(false)}
@@ -118,7 +119,7 @@ export const ModalComponent = ({
             />
           </div>
           <div className="w-full mt-5">
-            <ButtonDefault text="Adicionar" enabled={true} type="submit" />
+            <ButtonDefault text="Cadastrar" enabled={true} type="submit" />
           </div>
         </form>
       </div>

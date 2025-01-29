@@ -1,6 +1,7 @@
 "use client";
-import { MdEdit } from "react-icons/md";
+
 import { FaTrashAlt } from "react-icons/fa";
+import { useState } from "react";
 
 interface RowEmployeeProps {
   employee: {
@@ -25,6 +26,12 @@ export const RowEmployee = ({
   employee,
   setEmployeeList,
 }: RowEmployeeProps) => {
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setIsModalEditOpen(true);
+  };
+
   const handleDeleteEmployee = async (cpf: string) => {
     try {
       console.log("teste");
@@ -40,25 +47,20 @@ export const RowEmployee = ({
   };
 
   return (
-    <tr className="bg-bg-page-950 font-montserrat">
-      <td className="py-3 px-6 border-b border-gray-400">{employee.cpf}</td>
-      <td className="py-3 px-6 border-b border-gray-400">{employee.name}</td>
-      <td className="py-3 px-6 border-b border-gray-400">{employee.role}</td>
-      <td className="py-3 px-6 border-b border-gray-400">
+    <tr className="bg-font-primary-200 text-black  font-montserrat">
+      <td className="py-3 px-6 border-b border-gray-900">{employee.cpf}</td>
+      <td className="py-3 px-6 border-b border-gray-900">{employee.name}</td>
+      <td className="py-3 px-6 border-b border-gray-900">{employee.role}</td>
+      <td className="py-3 px-6 border-b border-gray-900">
         R$ {employee.salary}
       </td>
-      <td className="py-3 px-6 border-b border-gray-400 ">
+      <td className="py-3 px-6 border-b border-gray-900 ">
         <div className="flex w-full items-center justify-between">
           <button onClick={() => handleDeleteEmployee(employee.cpf)}>
             <FaTrashAlt
+              color="black"
               className="hover:fill-cancel-color-700 transition-all"
               size={20}
-            />
-          </button>
-          <button>
-            <MdEdit
-              className="hover:fill-yellow-500 transition-all"
-              size={24}
             />
           </button>
         </div>

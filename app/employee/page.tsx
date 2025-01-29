@@ -5,7 +5,7 @@ import { AsideNav } from "../components/aside/page";
 import { FaUserFriends } from "react-icons/fa";
 import { useState } from "react";
 import { ButtonAdd } from "../components/button/buttonAdd/page";
-import { ModalComponent } from "./modalAddEmployee/page";
+import { ModalComponent } from "./modalComponent/page";
 import { EmployeeView } from "./employeeView/page";
 
 const EmployeePage = () => {
