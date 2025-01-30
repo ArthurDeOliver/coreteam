@@ -59,12 +59,7 @@ const TeamsPage = () => {
             </div>
           </div>
         </div>
-        {isModalOpen && (
-          <ModalComponentTeams
-            teamsList={teamsList}
-            setIsModalOpen={setIsModalOpen}
-          />
-        )}
+        {isModalOpen && <ModalComponentTeams setIsModalOpen={setIsModalOpen} />}
       </div>
     </main>
   );
