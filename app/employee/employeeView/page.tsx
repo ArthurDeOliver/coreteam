@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
+import { useEffect } from "react";
 import { RowEmployee } from "./rowEmployee";
 
 interface EmployeeViewProps {
@@ -40,23 +40,23 @@ export const EmployeeView = ({
   }, []);
 
   return (
-    <div>
-      <div className="overflow-x-auto shadow-md rounded-lg">
-        <table className="min-w-full font-montserrat max-h-96 overflow-y-scroll">
-          {/* Cabeçalho */}
-          <thead className="bg-primary-color-600 text-white">
-            <tr>
-              <th className="py-3 px-6 text-left">Cpf</th>
-              <th className="py-3 px-6 text-left">Nome</th>
-              <th className="py-3 px-6 text-left">Função</th>
-              <th className="py-3 px-6 text-left">Salário</th>
-              <th className="py-3 px-6 text-center">Excluir</th>
-            </tr>
-          </thead>
+    <div className="w-full rounded-lg overflow-hidden ">
+      <table className="w-full border-collapse rounded-lg">
+        <thead className="bg-primary-color-600 text-center text-white">
+          <tr>
+            <th className="p-3 text-center w-1/4">CPF</th>
+            <th className="p-3 text-center w-1/4">Nome</th>
+            <th className="p-3 text-center w-1/4">Cargo</th>
+            <th className="p-3 text-center w-1/4">Salário</th>
+            <th className="p-3 text-center w-1/4">Excluir</th>
+          </tr>
+        </thead>
 
-          {/* Corpo */}
-          <tbody>
-            {employeeList
+        <tbody>
+          {employeeList.length > 0 ? (
+            employeeList
+              .slice() // Cria cópia para não alterar o array original
+              .reverse()
               .map((employee) => (
                 <RowEmployee
                   key={employee.cpf}
@@ -64,10 +64,15 @@ export const EmployeeView = ({
                   employee={employee}
                 />
               ))
-              .reverse()}
-          </tbody>
-        </table>
-      </div>
+          ) : (
+            <tr>
+              <td colSpan={4} className="p-4 text-center text-gray-500">
+                Nenhum funcionário registrado
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };

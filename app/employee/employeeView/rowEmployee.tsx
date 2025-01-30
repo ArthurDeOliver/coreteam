@@ -1,7 +1,6 @@
 "use client";
 
 import { FaTrashAlt } from "react-icons/fa";
-import { useState } from "react";
 
 interface RowEmployeeProps {
   employee: {
@@ -26,15 +25,8 @@ export const RowEmployee = ({
   employee,
   setEmployeeList,
 }: RowEmployeeProps) => {
-  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
-
-  const handleModalOpen = () => {
-    setIsModalEditOpen(true);
-  };
-
   const handleDeleteEmployee = async (cpf: string) => {
     try {
-      console.log("teste");
       await fetch(`http://localhost:3001/employee/${cpf}`, {
         method: "DELETE",
       });
@@ -51,7 +43,7 @@ export const RowEmployee = ({
       <td className="py-3 px-6 border-b border-gray-900">{employee.cpf}</td>
       <td className="py-3 px-6 border-b border-gray-900">{employee.name}</td>
       <td className="py-3 px-6 border-b border-gray-900">{employee.role}</td>
-      <td className="py-3 px-6 border-b border-gray-900">
+      <td className="py-3 px-6 border-b border-gray-900 text-center">
         R$ {employee.salary}
       </td>
       <td className="py-3 px-6 border-b border-gray-900 ">

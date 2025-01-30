@@ -13,11 +13,13 @@ export const RoleSelect = ({ value, onChange, name }: RoleSelectProps) => {
     <div className="flex w-full flex-col gap-2 h-full">
       <p className="text-sm">Função</p>
       <select
+        required
         name={name}
         onChange={onChange}
         value={value}
         className="py-2.5 px-4 rounded-md outline-none text-black focus:outline-orange-500 "
       >
+        <option className="text-font-primary-800">Selecione a função</option>
         <option value="DesenvolvedorFrontEnd">Desenvolvedor FrontEnd</option>
         <option value="DesenvolvedorBackEnd">Desenvolvedor BackEnd</option>
         <option value="UIUXDesigner">UI/UX Designer</option>

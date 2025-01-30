@@ -47,7 +47,7 @@ export const AsideNav = () => {
             } hover:bg-primary-color-800 flex items-center py-2 px-5 gap-3 rounded-full transition-all  active:bg-primary-color-500`}
           >
             <TiGroup size={25} />
-            Times
+            Equipes
           </Link>
         </li>
       </ul>

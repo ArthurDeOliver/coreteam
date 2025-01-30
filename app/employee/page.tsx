@@ -18,6 +18,14 @@ type FilterType =
 
 const EmployeePage = () => {
   //estados
+  const [employeeList, setEmployeeList] = useState<
+    Array<{
+      cpf: string;
+      name: string;
+      role: string;
+      salary: string;
+    }>
+  >([]);
   const [isModalOpen, setIsModalOpen] = useState(false); //tela modal
 
   const [selectedFilter, setSelectedFilter] = useState<FilterType>("none"); //selecionado oq deseja filtrar
@@ -27,15 +35,6 @@ const EmployeePage = () => {
   const handleApplyFilter = () => {
     setAppliedFilter(selectedFilter);
   };
-
-  const [employeeList, setEmployeeList] = useState<
-    Array<{
-      cpf: string;
-      name: string;
-      role: string;
-      salary: string;
-    }>
-  >([]);
 
   //variável que
   const filteredEmployees =
@@ -52,14 +51,14 @@ const EmployeePage = () => {
       <div className="flex flex-col sm:flex-row gap-5 p-2">
         <AsideNav />
         <div className="w-full bg-bg-page-950 p-4 rounded-md flex flex-col gap-10 sm:gap-5">
-          <h1 className=" text-2xl text-primary-color-500 flex items-center gap-2 pb-2 border-b-2 border-gray-900">
+          <h1 className=" text-2xl text-primary-color-500 flex items-center gap-2 pb-2 border-b-2 border-gray-900 font-montserrat">
             <FaUserFriends size={35} />
             Funcionários
           </h1>
           <div className="flex justify-center items-center w-full flex-col gap-10 px-5">
             <div className="flex flex-col sm:flex-row gap-10 w-full items-center justify-between">
               <span className="text-font-primary-500">
-                Lista de funcioários cadastrados no sistema CoreTeam
+                Adicione funcionários e gerencie-os
               </span>
 
               <div className="w-full h-16 sm:w-60 sm:h-12">
