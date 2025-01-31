@@ -6,9 +6,13 @@ import { IoCloseCircle } from "react-icons/io5";
 
 interface ModalComponenProps {
   setIsModalOpen: (value: boolean) => void;
+  refreshTeams: () => void;
 }
 
-export const ModalComponentTeams = ({ setIsModalOpen }: ModalComponenProps) => {
+export const ModalComponentTeams = ({
+  setIsModalOpen,
+  refreshTeams,
+}: ModalComponenProps) => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -30,6 +34,7 @@ export const ModalComponentTeams = ({ setIsModalOpen }: ModalComponenProps) => {
         body: JSON.stringify(formData),
       });
       //fechamento do modal
+      refreshTeams();
       setIsModalOpen(false);
     } catch (e) {
       console.error(e);
@@ -48,7 +53,7 @@ export const ModalComponentTeams = ({ setIsModalOpen }: ModalComponenProps) => {
 
   return (
     <div className="fixed inset-0 flex bg-black bg-opacity-50 items-center justify-center z-10 px-4 sm:px-0">
-      <div className="custom-scrollbar bg-bg-page-950 relative rounded-md shadow-lg p-6 flex flex-col max-w-2xl text-sm sm:text-base w-full">
+      <div className=" bg-bg-page-950 relative rounded-md shadow-lg p-6 flex flex-col max-w-2xl text-sm sm:text-base w-full">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl text-white">Criar Equipe</h2>
           <button

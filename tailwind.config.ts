@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      width: {
+        "card-team": "calc(33% - 1rem)",
+      },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"], // Use a variável CSS da fonte Montserrat
       },
