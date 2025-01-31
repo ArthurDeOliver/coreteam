@@ -96,7 +96,7 @@ const EmployeePage = () => {
                 <ButtonDefault
                   onClick={handleApplyFilter}
                   text="Aplicar"
-                  enabled={true}
+                  enable={true}
                 />
               </div>
             </div>

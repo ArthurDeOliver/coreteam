@@ -19,7 +19,9 @@ export const RoleSelect = ({ value, onChange, name }: RoleSelectProps) => {
         value={value}
         className="py-2.5 px-4 rounded-md outline-none text-black focus:outline-orange-500 "
       >
-        <option className="text-font-primary-800">Selecione a função</option>
+        <option className="text-font-primary-800" value="none">
+          Selecione a função
+        </option>
         <option value="DesenvolvedorFrontEnd">Desenvolvedor FrontEnd</option>
         <option value="DesenvolvedorBackEnd">Desenvolvedor BackEnd</option>
         <option value="UIUXDesigner">UI/UX Designer</option>

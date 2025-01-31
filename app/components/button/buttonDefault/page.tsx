@@ -2,21 +2,16 @@
 interface ButtonProps {
   text: string;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  enabled?: boolean | 0;
+  enable?: boolean | 0;
   type?: "submit" | "reset" | "button" | undefined;
 }
 
-export const ButtonDefault = ({
-  text,
-  onClick,
-  enabled,
-  type,
-}: ButtonProps) => {
+export const ButtonDefault = ({ text, onClick, enable, type }: ButtonProps) => {
   return (
     <button
       type={type}
       onClick={onClick}
-      disabled={!enabled}
+      disabled={!enable}
       className="w-full px-4 py-2 
       bg-primary-color-500 
       hover:bg-primary-color-600 

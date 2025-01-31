@@ -82,7 +82,7 @@ export const ModalComponentTeams = ({ setIsModalOpen }: ModalComponenProps) => {
               name="description"
             />
             <div className="w-full">
-              <ButtonDefault enabled={isValid} text="Cadastrar" type="submit" />
+              <ButtonDefault enable={isValid} text="Criar" type="submit" />
             </div>
           </div>
         </form>

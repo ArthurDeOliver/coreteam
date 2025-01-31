@@ -32,6 +32,14 @@ export const ModalComponent = ({
     role: "",
   });
 
+  //validação dos inputs
+  const isValid =
+    formData.name.trim().length >= 10 && // Nome com pelo menos 10 caracteres
+    formData.cpf.trim().length === 11 && // CPF com exatamente 11 caracteres
+    !isNaN(Number(formData.salary)) && // Salário é um número válido
+    Number(formData.salary) > 0 && // Salário maior que zero
+    formData.role !== "none"; // Função selecionada
+
   // Função genérica para lidar com as mudanças no estado
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -82,7 +90,7 @@ export const ModalComponent = ({
           </button>
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div className="w-full flex gap-4  flex-col sm:flex-row">
+          <div className="w-full flex gap-4 flex-col sm:flex-row">
             <InputComponent
               value={formData.name}
               onChange={handleChange}
@@ -119,7 +127,7 @@ export const ModalComponent = ({
             />
           </div>
           <div className="w-full mt-5">
-            <ButtonDefault text="Cadastrar" enabled={true} type="submit" />
+            <ButtonDefault text="Cadastrar" enable={isValid} type="submit" />
           </div>
         </form>
       </div>
