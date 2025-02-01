@@ -12,22 +12,6 @@ model employee {
   name         String
   salary       Float
   role         String
-  employeeteam employeeteam[]
 }
 
-model employeeteam {
-  employeeCpf String
-  teamId      Int
-  employee    employee @relation(fields: [employeeCpf], references: [cpf], map: "EmployeeTeam_employeeCpf_fkey")
-  team        team     @relation(fields: [teamId], references: [id], map: "EmployeeTeam_teamId_fkey")
 
-  @@id([employeeCpf, teamId])
-  @@index([teamId], map: "EmployeeTeam_teamId_fkey")
-}
-
-model team {
-  id           Int            @id @default(autoincrement())
-  name         String
-  description  String?
-  employeeteam employeeteam[]
-}

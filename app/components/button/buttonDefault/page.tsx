@@ -13,11 +13,12 @@ export const ButtonDefault = ({ text, onClick, enable, type }: ButtonProps) => {
       onClick={onClick}
       disabled={!enable}
       className="w-full px-4 py-2 
-      bg-primary-color-500 
-      hover:bg-primary-color-600 
-      active:bg-primary-color-400 
-      text-white transition-all rounded-md
+      bg-blue-500
+      hover:bg-blue-700
+      active:bg-blue-400
       disabled:bg-gray-400
+      text-white transition-all rounded-md
+
       flex items-center justify-center gap-2"
     >
       {text}

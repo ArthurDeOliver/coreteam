@@ -8,6 +8,7 @@ import { ButtonAdd } from "../components/button/buttonAdd/page";
 import { ModalComponent } from "./modalComponent/page";
 import { EmployeeView } from "./employeeView/page";
 import { ButtonDefault } from "../components/button/buttonDefault/page";
+import { ModalEditEmployee } from "./modalEdit/page";
 
 type FilterType =
   | "none"
@@ -17,7 +18,6 @@ type FilterType =
   | "QA";
 
 const EmployeePage = () => {
-  //estados
   const [employeeList, setEmployeeList] = useState<
     Array<{
       cpf: string;
@@ -26,73 +26,85 @@ const EmployeePage = () => {
       salary: string;
     }>
   >([]);
-  const [isModalOpen, setIsModalOpen] = useState(false); //tela modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [selectedFilter, setSelectedFilter] = useState<FilterType>("none"); //selecionado oq deseja filtrar
-  const [appliedFilter, setAppliedFilter] = useState<FilterType>("none"); //aplica o que foi selecionado para filtrar
+  const [selectedFilter, setSelectedFilter] = useState<FilterType>("none");
+  const [appliedFilter, setAppliedFilter] = useState<FilterType>("none");
 
-  // Função para aplicar o filtro, função que aplica o filtro selecionado
   const handleApplyFilter = () => {
     setAppliedFilter(selectedFilter);
   };
 
-  //variável que
   const filteredEmployees =
     appliedFilter === "none"
       ? employeeList
       : employeeList.filter((employee) => employee.role === appliedFilter);
 
   return (
-    <main className="flex flex-col ">
-      <header className="w-full p-4">
+    <main className="flex flex-col min-h-screen bg-gray-50">
+      <header className="w-full p-6 bg-white shadow-sm">
         <LogoPage />
       </header>
 
-      <div className="flex flex-col sm:flex-row gap-5 p-2">
+      <div className="flex flex-col xl:flex-row gap-6 p-6">
         <AsideNav />
-        <div className="w-full bg-bg-page-950 p-4 rounded-md flex flex-col gap-10 sm:gap-5">
-          <h1 className=" text-2xl text-primary-color-500 flex items-center gap-2 pb-2 border-b-2 border-gray-900 font-montserrat">
-            <FaUserFriends size={35} />
+
+        <div className="w-full bg-white p-6 rounded-xl shadow-md flex flex-col gap-8">
+          <h1 className="text-3xl text-gray-800 flex items-center gap-3 pb-4 border-b border-gray-200 font-montserrat font-semibold">
+            <FaUserFriends size={35} className="text-blue-500" />
             Funcionários
           </h1>
-          <div className="flex justify-center items-center w-full flex-col gap-10 px-5">
-            <div className="flex flex-col sm:flex-row gap-10 w-full items-center justify-between">
-              <span className="text-font-primary-500">
+
+          <div className="flex flex-col gap-8 w-full">
+            <div className="flex flex-col sm:flex-row gap-6 w-full items-center justify-between">
+              <span className="text-gray-600 text-lg">
                 Adicione funcionários e gerencie-os
               </span>
 
-              <div className="w-full h-16 sm:w-60 sm:h-12">
+              <div className="w-full sm:w-48">
                 <ButtonAdd
-                  text="Adicionar funcionário"
+                  text="Adicionar"
                   enabled={true}
                   onClick={() => setIsModalOpen(true)}
                 />
               </div>
             </div>
-            <div className=" w-full flex items-end flex-col sm:flex-row  gap-6">
-              <div className="flex w-full sm:w-fit  flex-col gap-2">
-                <span>Filtro de pesquisa:</span>
+
+            <div className="w-full flex flex-col sm:flex-row gap-6 items-end">
+              <div className="flex flex-col gap-2 w-full sm:w-64">
+                <span className="text-gray-600">Filtro de pesquisa:</span>
                 <select
                   value={selectedFilter}
                   onChange={(e) =>
                     setSelectedFilter(e.target.value as FilterType)
                   }
-                  className="py-2.5 px-4 w-full sm:w-60 rounded-md outline-none text-black focus:outline-orange-500 "
+                  className="py-2.5 px-4 w-full text-black rounded-md outline-none border border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors"
                 >
-                  <option value="none" className="text-gray-600">
-                    Todas os funcionários
+                  <option value="none" className="text-gray-500">
+                    Todos os funcionários
                   </option>
-                  <option value="DesenvolvedorFrontEnd">
+                  <option
+                    className="text-gray-900"
+                    value="DesenvolvedorFrontEnd"
+                  >
                     Desenvolvedor FrontEnd
                   </option>
-                  <option value="DesenvolvedorBackEnd">
+                  <option
+                    className="text-gray-900"
+                    value="DesenvolvedorBackEnd"
+                  >
                     Desenvolvedor BackEnd
                   </option>
-                  <option value="UIUXDesigner">UI/UX Designer</option>
-                  <option value="QA">QA</option>
+                  <option className="text-gray-900" value="UIUXDesigner">
+                    UI/UX Designer
+                  </option>
+                  <option className="text-gray-900" value="QA">
+                    QA
+                  </option>
                 </select>
               </div>
-              <div className="h-fit">
+
+              <div className="w-full sm:w-24">
                 <ButtonDefault
                   onClick={handleApplyFilter}
                   text="Aplicar"
@@ -100,12 +112,14 @@ const EmployeePage = () => {
                 />
               </div>
             </div>
+
             {isModalOpen && (
               <ModalComponent
                 setEmployeeList={setEmployeeList}
                 setIsModalOpen={setIsModalOpen}
               />
             )}
+
             <div className="w-full">
               <EmployeeView
                 employeeList={filteredEmployees}

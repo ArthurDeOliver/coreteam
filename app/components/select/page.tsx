@@ -5,21 +5,32 @@ import type { ChangeEventHandler } from "react";
 interface RoleSelectProps {
   name: string;
   value: string;
+  enable: boolean;
   onChange: ChangeEventHandler<HTMLSelectElement>;
 }
 
-export const RoleSelect = ({ value, onChange, name }: RoleSelectProps) => {
+export const RoleSelect = ({
+  value,
+  onChange,
+  name,
+  enable,
+}: RoleSelectProps) => {
   return (
     <div className="flex w-full flex-col gap-2 h-full">
-      <p className="text-sm">Função</p>
+      <label htmlFor={name} className="text-sm font-medium text-gray-700">
+        Função
+      </label>
       <select
+        disabled={!enable}
         required
         name={name}
         onChange={onChange}
         value={value}
-        className="py-2.5 px-4 rounded-md outline-none text-black focus:outline-orange-500 "
+        className={`py-2.5 px-4 rounded-lg border border-gray-300 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-colors text-gray-900 ${
+          !enable ? "bg-gray-100 cursor-not-allowed" : "bg-white"
+        }`}
       >
-        <option className="text-font-primary-800" value="none">
+        <option value="none" className="text-gray-500">
           Selecione a função
         </option>
         <option value="DesenvolvedorFrontEnd">Desenvolvedor FrontEnd</option>

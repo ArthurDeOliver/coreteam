@@ -7,6 +7,13 @@ export class EmployeeModel {
     return prisma.employee.findMany();
   }
 
+  static async updateEmployee(
+    cpf: string,
+    data: { name: string; salary: number; role: string }
+  ) {
+    return prisma.employee.update({ where: { cpf }, data });
+  }
+
   // Método para buscar um funcionário pelo role
   static async getEmployeeByRole(role: string) {
     return prisma.employee.findMany({ where: { role } });
@@ -22,6 +29,8 @@ export class EmployeeModel {
   }
 
   static async deleteEmployee(cpf: string) {
-    return prisma.employee.delete({ where: { cpf } });
+    return prisma.employee.delete({
+      where: { cpf },
+    });
   }
 }

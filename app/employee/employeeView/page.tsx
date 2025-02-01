@@ -40,15 +40,15 @@ export const EmployeeView = ({
   }, []);
 
   return (
-    <div className="w-full rounded-lg overflow-hidden ">
-      <table className="w-full border-collapse rounded-lg">
-        <thead className="bg-primary-color-600 text-center text-white">
+    <div className="w-full rounded-lg overflow-hidden shadow-md">
+      <table className="w-full border-collapse bg-white">
+        <thead className="bg-blue-600 text-white">
           <tr>
-            <th className="p-3 text-center w-1/4">CPF</th>
-            <th className="p-3 text-center w-1/4">Nome</th>
-            <th className="p-3 text-center w-1/4">Cargo</th>
-            <th className="p-3 text-center w-1/4">Salário</th>
-            <th className="p-3 text-center w-1/4">Excluir</th>
+            <th className="p-4 text-left font-medium">CPF</th>
+            <th className="p-4 text-left font-medium">Nome</th>
+            <th className="p-4 text-left font-medium">Cargo</th>
+            <th className="p-4 text-left font-medium">Salário</th>
+            <th className="p-4 text-center font-medium">Ações</th>
           </tr>
         </thead>
 
@@ -66,7 +66,7 @@ export const EmployeeView = ({
               ))
           ) : (
             <tr>
-              <td colSpan={4} className="p-4 text-center text-gray-500">
+              <td colSpan={5} className="p-6 text-center text-gray-500">
                 Nenhum funcionário registrado
               </td>
             </tr>

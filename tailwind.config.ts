@@ -13,6 +13,7 @@ export default {
       },
       fontFamily: {
         montserrat: ["Montserrat", "sans-serif"], // Use a variável CSS da fonte Montserrat
+        poppins: ["Poppins", "sans-serif"], // Use a variável CSS da fonte Poppins
       },
       colors: {
         background: "var(--background)",

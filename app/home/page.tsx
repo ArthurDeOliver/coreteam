@@ -7,29 +7,64 @@ import Image from "next/image";
 
 const HomePage = () => {
   return (
-    <main className="flex flex-col ">
-      <header className="w-full p-4">
+    <main className="flex flex-col min-h-screen bg-gray-50">
+      <header className="w-full p-6 bg-white shadow-sm">
         <LogoPage />
       </header>
 
-      <div className="flex flex-col sm:flex-row gap-5 p-2">
+      <div className="flex flex-col sm:flex-row gap-6 p-6">
         <AsideNav />
-        <div className="w-full bg-bg-page-950 p-4 rounded-md flex flex-col gap-6">
-          <h1 className=" text-2xl text-primary-color-500 flex items-center gap-2 pb-2 border-b-2 border-gray-900">
-            <FaHome size={35} />
+
+        <div className="w-full bg-white p-6 rounded-xl shadow-lg flex flex-col gap-8">
+          <h1 className="text-3xl text-gray-800 flex items-center gap-3 pb-4 border-b border-gray-200 font-montserrat font-semibold">
+            <FaHome size={35} className="text-blue-600" />
             Home
           </h1>
-          <div className="flex justify-center items-center w-full flex-col gap-5 py-4">
-            <Image
-              alt="imagem home"
-              width={200}
-              height={100}
-              src="/assets/worker.png"
-            />
-            <p className="text-font-primary-700 max-w-md text-center">
-              Bem vindo a plataforma CoreTeam! Cadastre funcionários, gerencie
-              times de desenvolvimento tudo aqui!
-            </p>
+
+          <div className="flex flex-col items-center gap-10 w-full py-6">
+            <div className="flex flex-col xl:flex-row items-center w-full gap-8">
+              <div className="flex-shrink-0">
+                <Image
+                  alt="Imagem ilustrativa de equipe"
+                  width={350}
+                  height={250}
+                  src="/assets/team-work.png"
+                />
+              </div>
+              <div className="flex flex-col gap-4 text-center rounded-xl shadow-md p-4 sm:text-left">
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Bem-vindo ao CoreTeam!
+                </h2>
+                <p className="text-gray-600 text-lg max-w-2xl">
+                  Gerencie sua equipe de desenvolvimento de forma eficiente e
+                  organizada. Cadastre funcionários, atribua funções, monitore
+                  salários e crie times de alta performance. Tudo em um só
+                  lugar!
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col xl:flex-row-reverse items-center w-full gap-8">
+              <div className="flex-shrink-0">
+                <Image
+                  alt="Imagem ilustrativa de colaboração"
+                  width={350}
+                  height={250}
+                  src="/assets/collaboration.png"
+                />
+              </div>
+              <div className="flex flex-col gap-4 text-center rounded-xl shadow-md p-4 sm:text-left">
+                <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Por que usar o CoreTeam?
+                </h3>
+                <p className="text-gray-600 text-lg max-w-2xl">
+                  Com o CoreTeam, você tem todas as ferramentas necessárias para
+                  gerenciar sua equipe de forma eficaz. Desde o cadastro de
+                  funcionários até a organização de times, tudo é feito de forma
+                  simples e intuitiva.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

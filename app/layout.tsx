@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Roboto } from "next/font/google";
 import { Montserrat } from "next/font/google";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
+});
 
 const roboto = Roboto({
   subsets: ["latin"], // Inclua o suporte para o alfabeto latino

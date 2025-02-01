@@ -13,6 +13,21 @@ export class EmployeeController {
     }
   }
 
+  static async updateEmployee(req: Request, res: Response) {
+    try {
+      const { cpf } = req.params;
+      const { name, salary, role } = req.body;
+      const updatedEmployee = await EmployeeModel.updateEmployee(cpf, {
+        name,
+        salary,
+        role,
+      });
+      res.status(200).json(updatedEmployee);
+    } catch (e) {
+      res.status(500).json({ message: "erro ao atualizar o funcionário" });
+    }
+  }
+
   static async getEmployeeByRole(req: Request, res: Response) {
     try {
       const { role } = req.params;
@@ -41,10 +56,10 @@ export class EmployeeController {
   static async deleteEmployee(req: Request, res: Response) {
     try {
       const { cpf } = req.params;
-      const deletedEmployee = await EmployeeModel.deleteEmployee(cpf);
-      res.status(200).json(deletedEmployee);
-    } catch (e) {
-      res.status(500).json(e);
+      await EmployeeModel.deleteEmployee(cpf);
+      res.json({ message: "Ticket deleted successfully" });
+    } catch (error) {
+      res.status(500).json({ message: "Error deleting ticket" });
     }
   }
 }
