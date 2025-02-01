@@ -51,6 +51,12 @@ export const ModalEditEmployee = ({
     e.preventDefault();
 
     try {
+      // Converte o salário para número antes de enviar
+      const updatedData = {
+        ...formData,
+        salary: Number(formData.salary),
+      };
+
       const response = await fetch(
         `http://localhost:3001/employee/${employee.cpf}`,
         {
@@ -58,20 +64,22 @@ export const ModalEditEmployee = ({
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(updatedData),
         }
       );
 
       if (response.ok) {
+        const updatedEmployee = await response.json();
+
         // Atualiza a lista de funcionários
         setEmployeeList((prevList) =>
           prevList.map((emp) =>
             emp.cpf === employee.cpf
               ? {
                   ...emp,
-                  name: formData.name,
-                  salary: formData.salary,
-                  role: formData.role,
+                  name: updatedEmployee.name,
+                  salary: updatedEmployee.salary.toString(), // Garante que o salário seja uma string
+                  role: updatedEmployee.role,
                 }
               : emp
           )
