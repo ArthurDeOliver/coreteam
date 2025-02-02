@@ -8,10 +8,17 @@ datasource db {
 }
 
 model employee {
-  cpf          String         @id
-  name         String
-  salary       Float
-  role         String
+  cpf     String  @id
+  name    String
+  salary  String
+  role    String
+  teamId  Int?    @unique  // O funcionário só pode estar em uma equipe
+  team    team?   @relation(fields: [teamId], references: [id])
 }
 
-
+model team {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  employees   employee[]
+}

@@ -46,15 +46,15 @@ export const RowEmployee = ({
   const getRoleStyle = (role: string) => {
     switch (role) {
       case "DesenvolvedorFrontEnd":
-        return "bg-blue-100 text-blue-800 border border-blue-200"; // Azul claro com texto azul escuro e borda azul
+        return "bg-blue-100 text-blue-800 border border-blue-200";
       case "DesenvolvedorBackEnd":
-        return "bg-green-100 text-green-800 border border-green-200"; // Verde claro com texto verde escuro e borda verde
+        return "bg-green-100 text-green-800 border border-green-200";
       case "UIUXDesigner":
-        return "bg-purple-100 text-purple-800 border border-purple-200"; // Roxo claro com texto roxo escuro e borda roxa
+        return "bg-purple-100 text-purple-800 border border-purple-200";
       case "QA":
-        return "bg-yellow-100 text-yellow-800 border border-yellow-200"; // Amarelo claro com texto amarelo escuro e borda amarela
+        return "bg-yellow-100 text-yellow-800 border border-yellow-200";
       default:
-        return "bg-gray-100 text-gray-800 border border-gray-200"; // Cinza para outros cargos
+        return "bg-gray-100 text-gray-800 border border-gray-200";
     }
   };
 
@@ -75,20 +75,11 @@ export const RowEmployee = ({
           {employee.role}
         </span>
       </td>
-      <td className="py-4 px-6 border-b border-gray-200 text-center text-black">
+      <td className="py-4 px-6 border-b border-gray-200  text-black">
         R$ {employee.salary}
       </td>
       <td className="py-4 px-6 border-b border-gray-200">
         <div className="flex w-full items-center justify-between">
-          <button
-            onClick={() => handleDeleteEmployee(employee.cpf)}
-            className="hover:bg-red-50 p-2 rounded-full transition-colors"
-          >
-            <FaTrashAlt
-              className="text-red-600 hover:text-red-700 transition-colors"
-              size={20}
-            />
-          </button>
           <button
             onClick={() => setIsModalEditOpen(true)}
             className="hover:bg-red-50 p-2 rounded-full transition-colors"
@@ -96,6 +87,15 @@ export const RowEmployee = ({
             <FaUserEdit
               className="text-yellow-600 hover:text-yellow-700 transition-colors"
               size={24}
+            />
+          </button>
+          <button
+            onClick={() => handleDeleteEmployee(employee.cpf)}
+            className="hover:bg-red-50 p-2 rounded-full transition-colors"
+          >
+            <FaTrashAlt
+              className="text-red-600 hover:text-red-700 transition-colors"
+              size={20}
             />
           </button>
         </div>

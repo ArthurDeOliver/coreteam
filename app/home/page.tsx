@@ -8,16 +8,16 @@ import Image from "next/image";
 const HomePage = () => {
   return (
     <main className="flex flex-col min-h-screen bg-gray-50">
-      <header className="w-full p-6 bg-white shadow-sm">
+      <header className="w-full px-6 py-4 bg-white shadow-sm">
         <LogoPage />
       </header>
 
-      <div className="flex flex-col sm:flex-row gap-6 p-6">
+      <div className="flex flex-col xl:flex-row gap-6 p-6">
         <AsideNav />
 
         <div className="w-full bg-white p-6 rounded-xl shadow-lg flex flex-col gap-8">
-          <h1 className="text-3xl text-gray-800 flex items-center gap-3 pb-4 border-b border-gray-200 font-montserrat font-semibold">
-            <FaHome size={35} className="text-blue-600" />
+          <h1 className="text-2xl text-gray-800 flex items-center bg-gradient-to-r from-blue-700 to-purple-950 bg-clip-text text-transparent   select-none gap-3 pb-4 border-b border-gray-200 font-montserrat font-semibold">
+            <FaHome size={35} className="text-blue-700" />
             Home
           </h1>
 
@@ -25,6 +25,7 @@ const HomePage = () => {
             <div className="flex flex-col xl:flex-row items-center w-full gap-8">
               <div className="flex-shrink-0">
                 <Image
+                  unoptimized
                   alt="Imagem ilustrativa de equipe"
                   width={350}
                   height={250}
@@ -47,6 +48,7 @@ const HomePage = () => {
             <div className="flex flex-col xl:flex-row-reverse items-center w-full gap-8">
               <div className="flex-shrink-0">
                 <Image
+                  unoptimized
                   alt="Imagem ilustrativa de colaboração"
                   width={350}
                   height={250}

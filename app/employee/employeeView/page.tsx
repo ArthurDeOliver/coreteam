@@ -44,11 +44,11 @@ export const EmployeeView = ({
       <table className="w-full border-collapse bg-white">
         <thead className="bg-blue-600 text-white">
           <tr>
-            <th className="p-4 text-left font-medium">CPF</th>
-            <th className="p-4 text-left font-medium">Nome</th>
-            <th className="p-4 text-left font-medium">Cargo</th>
-            <th className="p-4 text-left font-medium">Salário</th>
-            <th className="p-4 text-center font-medium">Ações</th>
+            <th className="py-4 px-6 text-left font-medium">CPF</th>
+            <th className="py-4 px-6 text-left font-medium">Nome</th>
+            <th className="py-4 px-6 text-left font-medium">Cargo</th>
+            <th className="py-4 px-6 text-left font-medium">Salário</th>
+            <th className="py-4 px-6 text-center font-medium">Ações</th>
           </tr>
         </thead>
 

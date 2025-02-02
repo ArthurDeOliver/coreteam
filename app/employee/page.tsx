@@ -8,7 +8,6 @@ import { ButtonAdd } from "../components/button/buttonAdd/page";
 import { ModalComponent } from "./modalComponent/page";
 import { EmployeeView } from "./employeeView/page";
 import { ButtonDefault } from "../components/button/buttonDefault/page";
-import { ModalEditEmployee } from "./modalEdit/page";
 
 type FilterType =
   | "none"
@@ -42,7 +41,7 @@ const EmployeePage = () => {
 
   return (
     <main className="flex flex-col min-h-screen bg-gray-50">
-      <header className="w-full p-6 bg-white shadow-sm">
+      <header className="w-full px-6 py-4 bg-white shadow-sm">
         <LogoPage />
       </header>
 
@@ -50,8 +49,8 @@ const EmployeePage = () => {
         <AsideNav />
 
         <div className="w-full bg-white p-6 rounded-xl shadow-md flex flex-col gap-8">
-          <h1 className="text-3xl text-gray-800 flex items-center gap-3 pb-4 border-b border-gray-200 font-montserrat font-semibold">
-            <FaUserFriends size={35} className="text-blue-500" />
+          <h1 className="text-2xl text-gray-800 flex items-center bg-gradient-to-r from-blue-700 to-purple-950 bg-clip-text text-transparent   select-none gap-3 pb-4 border-b border-gray-200 font-montserrat font-semibold">
+            <FaUserFriends size={35} className="text-blue-700" />
             Funcionários
           </h1>
 
