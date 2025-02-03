@@ -1,56 +1,118 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonDefault } from "@/app/components/button/buttonDefault/page";
 import { InputComponent } from "@/app/components/input/page";
-import { RoleSelect } from "@/app/components/select/page";
+import { RoleSelect } from "../selectRole/page";
 import { IoCloseCircle } from "react-icons/io5";
+import { EmployeeSelect } from "../selectEmployee/page";
 
 interface ModalComponentProps {
   setIsModalOpen: (value: boolean) => void;
 }
 
-export const ModalCreateTeaam = ({ setIsModalOpen }: ModalComponentProps) => {
+interface Employee {
+  cpf: string;
+  name: string;
+  role: string;
+  salary: string;
+}
+
+export const ModalCreateTeam = ({ setIsModalOpen }: ModalComponentProps) => {
+  const [employeeList, setEmployeeList] = useState<Employee[]>([]);
+  const [employeeListFiltered, setEmployeeListFiltered] = useState<Employee[]>(
+    []
+  );
+  const [selectedRole, setSelectedRole] = useState<string>("");
+  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
+    null
+  );
   const [formData, setFormData] = useState({
     name: "",
-    cpf: "",
-    salary: "",
-    role: "",
+    description: "",
+    employees: [] as Employee[],
   });
+  const [isEmployeeApplied, setIsEmployeeApplied] = useState<boolean>(false);
 
-  const isValid =
-    formData.name.trim().length >= 10 &&
-    formData.cpf.trim().length === 11 &&
-    !isNaN(Number(formData.salary)) &&
-    Number(formData.salary) > 0 &&
-    formData.role !== "none";
+  const fetchEmployees = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/employee");
+      const employeesData: Employee[] = await response.json();
+      setEmployeeList(employeesData);
+    } catch (error) {
+      console.error("Erro ao buscar funcionários:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchEmployees();
+  }, []);
+
+  useEffect(() => {
+    selectedRole
+      ? setEmployeeListFiltered(
+          employeeList.filter((emp) => emp.role === selectedRole)
+        )
+      : setEmployeeListFiltered(employeeList);
+  }, [selectedRole, employeeList]);
+
+  const handleAddEmployee = () => {
+    if (
+      selectedEmployee &&
+      !formData.employees.some((emp) => emp.cpf === selectedEmployee.cpf)
+    ) {
+      setFormData((prev) => ({
+        ...prev,
+        employees: [...prev.employees, selectedEmployee],
+      }));
+      setIsEmployeeApplied(true);
+      setTimeout(() => setIsEmployeeApplied(false), 3000);
+    }
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSelectRole = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedRole(e.target.value);
+  };
+
+  const handleSelectEmployee = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const employee =
+      employeeListFiltered.find((emp) => emp.cpf === e.target.value) || null;
+    setSelectedEmployee(employee);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3001/team", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      response.ok
+        ? (alert("Equipe cadastrada com sucesso!"), setIsModalOpen(false))
+        : console.error("Erro ao cadastrar equipe");
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+    }
   };
 
   return (
     <div className="fixed inset-0 flex bg-black bg-opacity-50 items-center justify-center z-10 px-4 sm:px-0">
       <div className="bg-white relative rounded-lg shadow-lg p-6 flex flex-col max-w-2xl w-full">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold text-gray-800">
-            Cadastrar Funcionário
-          </h2>
+          <h2 className="text-2xl font-semibold text-gray-800">Criar equipe</h2>
           <button
-            className="absolute -top-4 -right-4 bg-white rounded-full hover:bg-gray-100 transition-colors"
+            className="absolute -top-4 -right-4 bg-white rounded-full hover:bg-gray-100"
             onClick={() => setIsModalOpen(false)}
           >
             <IoCloseCircle
-              className="text-red-600 hover:text-red-700 transition-colors"
+              className="text-red-600 hover:text-red-700"
               size={35}
             />
           </button>
@@ -63,44 +125,46 @@ export const ModalCreateTeaam = ({ setIsModalOpen }: ModalComponentProps) => {
               value={formData.name}
               onChange={handleChange}
               enabled={true}
-              label="Nome"
-              placeholder="Digite o nome do funcionário"
+              label="Nome da equipe"
+              placeholder="Digite o nome da equipe"
               type="text"
               name="name"
             />
             <InputComponent
-              maxLength={11}
-              value={formData.cpf}
+              maxLength={50}
+              value={formData.description}
               onChange={handleChange}
               enabled={true}
-              label="CPF"
-              placeholder="Digite o CPF"
+              label="Descrição da equipe"
+              placeholder="Digite a descrição da equipe"
               type="text"
-              name="cpf"
+              name="description"
             />
           </div>
 
-          <div className="w-full flex gap-6 items-end flex-col sm:flex-row">
-            <InputComponent
-              maxLength={5}
-              value={formData.salary}
-              onChange={handleChange}
-              enabled={true}
-              label="Salário"
-              placeholder="Digite o salário"
-              type="text"
-              name="salary"
+          <span className="text-xl text-gray-900">Adicionar funcionário</span>
+          <div className="w-full flex gap-3 items-end flex-col sm:flex-row">
+            <RoleSelect enable={true} onChange={handleSelectRole} name="role" />
+            <EmployeeSelect
+              onChange={handleSelectEmployee}
+              employeeList={employeeListFiltered}
             />
-            <RoleSelect
-              enable={true}
-              value={formData.role}
-              onChange={handleChange}
-              name="role"
-            />
+            <div className="flex flex-col w-full sm:w-auto">
+              <ButtonDefault
+                text="Aplicar"
+                enable={true}
+                onClick={handleAddEmployee}
+                type="button"
+              />
+            </div>
           </div>
-
-          <div className="w-full mt-4">
-            <ButtonDefault text="Cadastrar" enable={isValid} type="submit" />
+          {isEmployeeApplied && (
+            <p className="text-green-700 bg-green-200 w-full px-4 py-3 rounded-lg font-semibold text-lg mt-1">
+              Funcionário Aplicado! ✅
+            </p>
+          )}
+          <div className="w-full">
+            <ButtonDefault text="Criar equipe" enable={true} type="submit" />
           </div>
         </form>
       </div>

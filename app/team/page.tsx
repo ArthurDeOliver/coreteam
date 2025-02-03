@@ -3,12 +3,43 @@
 import { LogoPage } from "@/app/components/logo/page";
 import { TiGroup } from "react-icons/ti";
 import { AsideNav } from "../components/aside/page";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonAdd } from "../components/button/buttonAdd/page";
-import { ModalCreateTeaam } from "./modalCreateTeam/page";
+import { ModalCreateTeam } from "./modalCreateTeam/page";
+
+interface Employee {
+  cpf: string;
+  name: string;
+  role: string;
+  salary: string;
+}
+
+interface Team {
+  id: number;
+  name: string;
+  description: string;
+  employes: Employee[];
+}
 
 const TeamPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [teamsList, setTeamsList] = useState<Team[]>([]);
+
+  const fetchTeams = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/team");
+      const teamsData = await response.json();
+      setTeamsList(teamsData);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchTeams();
+  }, []);
+
   return (
     <main className="flex flex-col min-h-screen bg-gray-50">
       <header className="w-full px-6 py-4 bg-white shadow-sm">
@@ -38,12 +69,10 @@ const TeamPage = () => {
                 />
               </div>
             </div>
-
-            {isModalOpen && (
-              <ModalCreateTeaam setIsModalOpen={setIsModalOpen} />
-            )}
-
-            <div className="w-full"></div>
+            <div>
+              <h1 className="text-black"></h1>
+            </div>
+            {isModalOpen && <ModalCreateTeam setIsModalOpen={setIsModalOpen} />}
           </div>
         </div>
       </div>
