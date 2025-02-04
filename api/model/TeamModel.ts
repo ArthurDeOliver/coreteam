@@ -12,18 +12,39 @@ export class TeamModel {
   static async createTeam(
     name: string,
     description?: string,
-    employeeCpfs?: string[] // Lista de CPF dos funcionários a serem associados ao time
+    employees?: string[]
   ) {
     try {
-      return prisma.team.create({
-        data: {
-          name,
-          description,
-          employees: {
-            connect: employeeCpfs?.map((cpf) => ({ cpf })), // Conectando os funcionários ao time pelo CPF
+      console.log(employees);
+      // Cria o time
+      const newTeam = await prisma.team.create({
+        data: { name, description },
+      });
+
+      // Associa os funcionários ao time
+      if (employees && employees.length > 0) {
+        const updatedEmployees = await prisma.employee.updateMany({
+          where: {
+            cpf: {
+              in: employees,
+            },
           },
-        },
-        include: { employees: true }, // Inclui os funcionários associados no retorno
+          data: {
+            teamId: newTeam.id,
+          },
+        });
+
+        if (updatedEmployees.count === 0) {
+          console.warn(
+            "Nenhum funcionário foi atualizado. CPFs podem estar errados."
+          );
+        }
+      }
+
+      // Retorna o time com os funcionários associados
+      return await prisma.team.findUnique({
+        where: { id: newTeam.id },
+        include: { employees: true },
       });
     } catch (error) {
       console.error("Erro ao criar o time:", error);

@@ -18,14 +18,14 @@ export class TeamController {
   // Método para criar um time e associar funcionários
   static async createTeam(req: Request, res: Response) {
     try {
-      const { name, description, employeeCpfs } = req.body;
+      const { name, description, employees } = req.body;
+      console.log(req.body);
+      // Validação básica
+      if (!name) {
+        return res.status(400).json({ message: "Nome do time é obrigatório" });
+      }
 
-      // Criação do time
-      const newTeam = await TeamModel.createTeam(
-        name,
-        description,
-        employeeCpfs
-      );
+      const newTeam = await TeamModel.createTeam(name, description, employees);
 
       res.status(201).json({
         message: "Time criado com sucesso.",
@@ -34,7 +34,8 @@ export class TeamController {
     } catch (e) {
       console.error("Erro ao criar time:", e);
       res.status(500).json({
-        message: "Erro ao criar time. Tente novamente mais tarde.",
+        message:
+          "Erro ao criar time. Verifique se os CPFs são válidos e não estão associados a outro time.",
       });
     }
   }

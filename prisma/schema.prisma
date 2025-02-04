@@ -8,12 +8,12 @@ datasource db {
 }
 
 model employee {
-  cpf     String  @id
-  name    String
-  salary  String
-  role    String
-  teamId  Int?    @unique  // O funcionário só pode estar em uma equipe
-  team    team?   @relation(fields: [teamId], references: [id])
+  cpf    String  @id
+  name   String
+  salary String
+  role   String
+  teamId Int?     // REMOVA O @unique
+  team   team?    @relation(fields: [teamId], references: [id])
 }
 
 model team {

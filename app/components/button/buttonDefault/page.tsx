@@ -13,9 +13,9 @@ export const ButtonDefault = ({ text, onClick, enable, type }: ButtonProps) => {
       onClick={onClick}
       disabled={!enable}
       className="w-full px-4 py-2 
-      bg-blue-500
+      bg-blue-600
       hover:bg-blue-700
-      active:bg-blue-400
+      active:bg-blue-500
       disabled:bg-gray-400
       text-white transition-all rounded-md
 

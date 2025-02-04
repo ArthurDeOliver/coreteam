@@ -6,15 +6,15 @@ import { RoleSelect } from "../selectRole/page";
 import { IoCloseCircle } from "react-icons/io5";
 import { EmployeeSelect } from "../selectEmployee/page";
 
-interface ModalComponentProps {
-  setIsModalOpen: (value: boolean) => void;
-}
-
 interface Employee {
   cpf: string;
   name: string;
   role: string;
   salary: string;
+}
+
+interface ModalComponentProps {
+  setIsModalOpen: (value: boolean) => void;
 }
 
 export const ModalCreateTeam = ({ setIsModalOpen }: ModalComponentProps) => {
@@ -29,7 +29,7 @@ export const ModalCreateTeam = ({ setIsModalOpen }: ModalComponentProps) => {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    employees: [] as Employee[],
+    employees: [] as string[], // Agora armazena apenas CPFs
   });
   const [isEmployeeApplied, setIsEmployeeApplied] = useState<boolean>(false);
 
@@ -58,14 +58,14 @@ export const ModalCreateTeam = ({ setIsModalOpen }: ModalComponentProps) => {
   const handleAddEmployee = () => {
     if (
       selectedEmployee &&
-      !formData.employees.some((emp) => emp.cpf === selectedEmployee.cpf)
+      !formData.employees.includes(selectedEmployee.cpf) // Verifica se o CPF já existe
     ) {
       setFormData((prev) => ({
         ...prev,
-        employees: [...prev.employees, selectedEmployee],
+        employees: [...prev.employees, selectedEmployee.cpf], // Adiciona apenas o CPF
       }));
       setIsEmployeeApplied(true);
-      setTimeout(() => setIsEmployeeApplied(false), 3000);
+      setTimeout(() => setIsEmployeeApplied(false), 1000);
     }
   };
 
@@ -91,12 +91,17 @@ export const ModalCreateTeam = ({ setIsModalOpen }: ModalComponentProps) => {
       const response = await fetch("http://localhost:3001/team", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          employees: formData.employees, // Mapeia CPFs para o formato esperado pelo backend
+        }),
       });
-
-      response.ok
-        ? (alert("Equipe cadastrada com sucesso!"), setIsModalOpen(false))
-        : console.error("Erro ao cadastrar equipe");
+      console.log(formData);
+      if (response.ok) {
+        setIsModalOpen(false);
+      } else {
+        console.error("Erro ao cadastrar equipe");
+      }
     } catch (error) {
       console.error("Erro na requisição:", error);
     }
@@ -158,9 +163,13 @@ export const ModalCreateTeam = ({ setIsModalOpen }: ModalComponentProps) => {
               />
             </div>
           </div>
-          {isEmployeeApplied && (
+          {isEmployeeApplied ? (
             <p className="text-green-700 bg-green-200 w-full px-4 py-3 rounded-lg font-semibold text-lg mt-1">
               Funcionário Aplicado! ✅
+            </p>
+          ) : (
+            <p className="text-gray-600 bg-gray-200 w-full px-4 py-3 rounded-lg  text-lg mt-1">
+              Status da aplicação
             </p>
           )}
           <div className="w-full">
