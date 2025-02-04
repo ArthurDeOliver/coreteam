@@ -10,7 +10,7 @@ Um projeto para organizar funcionários e criar equipes de desenvolvimento de fo
 
 ### 👤 Cadastro de Funcionários
 
-- **Cadastrar novo funcionário:** Nome, cargo, e-mail, habilidades técnicas e departamento.
+- **Cadastrar novo funcionário:** Nome, cargo e habilidades técnicas.
 - **Editar informações:** Atualize dados dos funcionários conforme necessário.
 - **Listar/Excluir funcionários:** Visualize ou remova registros do sistema.
 
@@ -19,13 +19,6 @@ Um projeto para organizar funcionários e criar equipes de desenvolvimento de fo
 - **Criar equipes:** Defina um nome, projeto associado e líder da equipe.
 - **Adicionar/Remover membros:** Selecione funcionários cadastrados para compor a equipe.
 - **Visualizar equipes:** Detalhes completos da equipe, incluindo membros e status do projeto.
-
-### 📊 Dashboard Interativo
-
-- Relatório de alocação de funcionários por equipe.
-- Busca filtrada por habilidades, departamento ou cargo.
-
----
 
 ## 🛠️ Tecnologias Utilizadas
 
